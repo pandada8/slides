@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      html{background: white}
+    </style>
+    <script src="vue.js"></script>
+    <script type="text/javascript">
+      document.onload = function(){
+        var vm = new Vue({
+          el: "#container",
+          data: {
+            name: "mvvm",
+            action: "Welcome",
+          }
+        })
+      }
+    </script>
+  </head>
+  <body>
+    <div id="container">
+      <p>Hello, {{action}} to {{name}} </p>
+      <input type="text" v-model="name">
+    </div>
+  </body>
+</html>
