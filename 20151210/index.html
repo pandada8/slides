@@ -215,25 +215,25 @@
 							<li>transition</li>
 							<li>Computed Properties</li>
 							<li>Conditional Rendering</li>
-							<li></li>
+							<li>...</li>
 						</ul>
 					</section>
 					<section>
 						<h2>We love Component ! </h2>
-						<h3>使用 Vue 开发可重用的组件</h3>
+						<h3 class="fragment">使用 Vue 开发可重用的组件</h3>
 						<ul>
-							<li>使用 <code>Vue.extend()</code> 来产生一个构造器</li>
-							<li>使用 <code>Vue.component()</code> 来注册这个组件</li>
-							<li>在模板中直接使用组件</li>
+							<li class="fragment">使用 <code>Vue.extend()</code> 来产生一个构造器</li>
+							<li class="fragment">使用 <code>Vue.component()</code> 来注册这个组件</li>
+							<li class="fragment">在模板中直接使用组件</li>
 						</ul>
-						<h3>看上去似乎有点繁琐?</h3>
+						<h3 class="fragment">看上去似乎有点繁琐?</h3>
 					</section>
 					<section>
 						<h2>Vue-loader 与 webpack</h2>
-						<blockquote>这一次，我们再一次重新定义 Web Components</blockquote>
+						<blockquote class="fragment">这一次，我们再一次重新定义 Web Components</blockquote>
 						<ul>
-							<li>得益于 webpack 丰富的 loader 插件, 可以直接使用自己喜欢的各种语言</li>
-							<li>在代码中直接 require 就可以得到一个 component</li>
+							<li class="fragment">得益于 webpack 丰富的 loader 插件, 可以直接使用自己喜欢的各种语言</li>
+							<li class="fragment">在代码中直接 require 就可以得到一个 component</li>
 						</ul>
 					</section>
 					<section>
@@ -245,6 +245,12 @@
   .col-sm-10(v-bind:class="{'has-error':!pass}")
     input.form-control(v-model="document[key]" placeholder="{{template.$example}}")
 </template>
+
+<style scoped>
+    .form-group{
+        background-color: white;
+    };
+</style>
 
 <script lang="coffee">
 module.exports =
@@ -268,18 +274,18 @@ module.exports =
 					</section>
 					<section>
 						<h2>高性能</h2>
-						<blockquote>(在 Vue.js 中)唯一需要做的优化是在 v-for 上使用 track-by。</blockquote>
-						Vue 使用 Object.defineProperty 将对对象的访问转变为对 getter setter 的访问。
-						Vue 通过分析表达式来得出依赖。并利用 getter / setter 来监听数据的变化
-						<h3>避免了 Angular/riot.js 等中的脏检测</h3>
-						<b> Tradeoff</b> Vue 不支持 IE8 及以下浏览器
+						<blockquote class="fragment">(在 Vue.js 中)唯一需要做的优化是在 v-for 上使用 track-by。</blockquote>
+						<p class="fragment">Vue 使用 Object.defineProperty 将对对象的访问转变为对 getter setter 的访问。 </p>
+						<p class="fragment">Vue 通过分析表达式来得出依赖。并利用 getter / setter 来监听数据的变化 </p>
+						<h3 class="fragment">避免了 Angular/riot.js 等中的脏检测, 可以获得比 React / Angular 更好的性能体验</h3>
+						<p class="fragment"><b> Tradeoff</b> Vue 不支持 IE8 及以下浏览器</p>
 					</section>
 					<section>
 						 <h2>更加灵活</h2>
 						 vue 只是 MVVM 中的 VM 层，可以自由搭配自己所需要的其他库和语言。也可以轻易的嵌入到一个单页中。不必完全重构应用
 					</section>
 				</section>
-
+                <section>Q&A</section>
 			</div>
 
 		</div>
