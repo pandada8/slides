@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Think in MV* - intro vue.js</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+		<style media="screen">
+			input{
+				font-size: 0.95em;
+				outline: none;
+				padding: 10px;
+				text-align: center;
+			}
+		</style>
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1></h1>
+					<h2>又一场 Vue.js 安利大会</h2>
+					<h5><b>Pandada8</b> 2016/07</h5>
+				</section>
+
+
+				<section>
+					<section>
+						 传统的网站开发流程
+					</section>
+					<section>
+					 	<h3>后端: 我们要使用 MVC 架构</h3>
+						<img src="back-end-mvc.png" alt="" />
+					</section>
+					<section>
+						 <h2>前端：我能干什么？</h2>
+						 <h2 class="fragment">后端：去套页面</h2>
+					</section>
+					<section>
+						。。。
+					</section>
+					<section>
+							<h3>看起来分工很美好</h3>
+					</section>
+					<section>
+							<h3>Problems</h3>
+							<ul>
+								<li>代码中存在大量约定的内容</li>
+								<li>前端工作（JS/CSS）依赖于后端产生的 HTML</li>
+								<li>数据来源混杂：一部分数据在 DOM 上，一部分数据要 ajax 获取</li>
+								<li>业务逻辑混乱：一些在前端，一些在 Model 层，更多的在 <b>View层</b></li>
+							</ul>
+					</section>
+					<section>
+						 <h3>问题不只有这些</h3>
+						 <ul>
+						 	<li>前端需要后端的开发环境</li>
+							<li>服务端 View 层高度耦合</li>
+							<li>沟通成本高</li>
+							<li>职责不清晰</li>
+						 </ul>
+					</section>
+					<section>
+						<h2>谁来维护页面？</h2>
+						<h6>前端写 Demo，后端套页面</h6>
+						<ul>
+							<li>后端需要写 HTML</li>
+							<li>前端要确认后端写的 HTML 没问题</li>
+						</ul>
+						<h6>前端写页面，后端负责数据</h6>
+						<ul>
+							<li>前端需要了解后端语言和后端<b>架构</b></li>
+						</ul>
+					</section>
+					<section>
+						<img width="60%" src="dog.gif"/>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>有什么好处呢?</h2>
+						<ul>
+							<li>关注点分离</li>
+							<li>职责分离</li>
+							<li>更好的共建模式</li>
+							<li>快速的反应变化</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>来说说 Vue 吧！</h2>
+						<img src="logo.png" style="background: none;border: none" />
+					</section>
+					<section>
+						<p>developed by yyx</p>
+						<img src="yyx.jpeg" alt="">
+						<p>数据驱动的组件，为现代化的 Web 界面而生</p>
+					</section>
+					<section id="demo1">
+						<h1>一个简单的 Demo </h1>
+						<p>Hello, {{action}} to {{name}}!</p>
+						<input type="text" v-model="name">
+					</section>
+					<section>
+						<h2>简单！</h2>
+						<pre><code class="hljs"><div id="demo1">
+	<p>Hello, {{action}} to {{name}}!</p>
+	<input type="text" v-model="name">
+</div></code></pre>
+						<pre><code class="hljs">new Vue({
+	el: "#demo1",
+	data: {
+		action: "Welcome",
+		name: "Vue.js"
+	}
+})</code></pre>
+					</section>
+					<section>
+						<h1>Vanilla js version</h1>
+						<pre><code class="hljs">
+window.addEventListener("load", function(){
+	var input = window.querySelector("input")
+	var display = window.querySelector("p.target")
+	var action = "Welcome"
+	input.addEventListener("keydown", function(){
+	    display.innerText = "Hello, " action + " to " + input.value
+	})
+})
+						</code></pre>
+					</section>
+					<section>
+						<h1>有什么问题？</h1>
+						<ul>
+							<li>代码与页面布局密切相关</li>
+							<li>逻辑与操纵DOM 的代码互相混杂</li>
+						</ul>
+					</section>
+					<section>
+						<h1>让我们来做个稍微复杂点的 Demo</h1>
+					</section>
+					<section id="demo2">
+						<h2>Todo MVC<br><small>with 17 lines of vuejs</small></h2>
+
+						<ul>
+								<li v-for="i in tasks" v-on:click="delete($index)" track-by="$index">{{i}}</li>
+						</ul>
+						<div><input type="text" placeholder="Press Enter to add" v-model="new_name" v-on:keydown.enter="add"/></div>
+					</section>
+					<section>
+						 <h3>Code</h3>
+						 <pre><code style="overflow-x:scroll"><ul>
+  <li v-for="i in tasks" v-on:click="delete($index)" track-by="$index">{{i}}</li>
+</ul>
+<input type="text" placeholder="Press Enter to add" v-model="new_name" v-on:keydown.enter="add"/>
+					</code></pre>
+						<pre><code>new Vue({
+	el: "#demo2",
+	data: {
+		tasks: [],
+		new_name: ""
+	},
+	methods: {
+		delete: function(index){
+			this.tasks.splice(index, 1);
+		},
+		add: function(){
+			if(this.new_name.length){
+				this.tasks.push(this.new_name)
+				this.new_name = ""
+			}
+		}
+	}
+})</code></pre>
+					</section>
+					<section>
+						<h2>更多的特性</h2>
+						<ul>
+							<li>filter</li>
+							<li>transition</li>
+							<li>Computed Properties</li>
+							<li>Conditional Rendering</li>
+							<li>...</li>
+						</ul>
+					</section>
+					<section>
+						<h2>We love Component ! </h2>
+						<h3 class="fragment">使用 Vue 开发可重用的组件</h3>
+						<ul>
+							<li class="fragment">使用 <code>Vue.extend()</code> 来产生一个构造器</li>
+							<li class="fragment">使用 <code>Vue.component()</code> 来注册这个组件</li>
+							<li class="fragment">在模板中直接使用组件</li>
+						</ul>
+						<h3 class="fragment">看上去似乎有点繁琐?</h3>
+					</section>
+					<section>
+						<h2>Vue-loader 与 webpack</h2>
+						<blockquote class="fragment">这一次，我们再一次重新定义 Web Components</blockquote>
+						<ul>
+							<li class="fragment">得益于 webpack 丰富的 loader 插件, 可以直接使用自己喜欢的各种语言</li>
+							<li class="fragment">在代码中直接 require 就可以得到一个 component</li>
+						</ul>
+					</section>
+					<section>
+						elem.vue
+						<pre>
+							<code><template lang="jade">
+.form-group
+  label.control-label.col-sm-2(v-el:tooltip) {{template.$desc}}
+  .col-sm-10(v-bind:class="{'has-error':!pass}")
+    input.form-control(v-model="document[key]" placeholder="{{template.$example}}")
+</template>
+
+<style scoped>
+    .form-group{
+        background-color: white;
+    };
+</style>
+
+<script lang="coffee">
+module.exports =
+  name: "elem-text"
+  props: ["template", "document", "key"]
+  mixins: [require "./mixin-tooltip.coffee"]
+  beforeCompile: ->
+    @template.$re = new RegExp(@template.$re) if @template.$re?
+  computed:
+    pass: ->
+      if @template.$re? then @template.$re.test(@document[@key]) else true
+</script></code>
+						</pre>
+					</section>
+					<section>
+						和其他框架相比
+					</section>
+					<section>
+						<h2>MVVM made simple</h2>
+						<h3>拥有简单的 API 与简单的架构设计，方便上手，gzip + min 大小 23K 左右</h3>
+					</section>
+					<section>
+						<h2>高性能</h2>
+						<blockquote class="fragment">(在 Vue.js 中)唯一需要做的优化是在 v-for 上使用 track-by。</blockquote>
+						<p class="fragment">Vue 使用 Object.defineProperty 将对对象的访问转变为对 getter setter 的访问。 </p>
+						<p class="fragment">Vue 通过分析表达式来得出依赖。并利用 getter / setter 来监听数据的变化 </p>
+						<h3 class="fragment">避免了 Angular/riot.js 等中的脏检测, 在较多元素时不需要太 hack 的优化</h3>
+						<p class="fragment"><b> Tradeoff</b> Vue 不支持 IE8 及以下浏览器</p>
+					</section>
+					<section>
+						 <h2>更加灵活</h2>
+						 vue 只是 MVVM 中的 VM 层，可以自由搭配自己所需要的其他库和语言。也可以轻易的嵌入到一个单页中。不必完全重构应用
+					</section>
+				</section>
+				<section>Q&A</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+		<script src="demos/vue.js"></script>
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+			new Vue({
+				el: "#demo1",
+				data: {
+					action: "Welcome",
+					name: "Vue.js"
+				}
+			})
+new Vue({
+	el: "#demo2",
+	data: {
+		tasks: [],
+		new_name: ""
+	},
+	methods: {
+		delete: function(index){
+			this.tasks.splice(index, 1);
+		},
+		add: function(){
+			if(this.new_name.length){
+				this.tasks.push(this.new_name)
+				this.new_name = ""
+			}
+		}
+	}
+})
+		</script>
+
+	</body>
+</html>
